@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { useAppSelector } from "@/app/hooks";
@@ -98,14 +99,16 @@ export default function AddAttendance() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setNotification(null);
-
     if (!validateForm()) {
       setNotification({
         type: "error",
         message: "Please correct the errors in the form",
       });
+      toast.error("Please correct the errors in the form");
       return;
     }
+
+    const toastId = toast.loading("Saving attendance...");
 
     try {
       const attendanceData = {
@@ -134,14 +137,19 @@ export default function AddAttendance() {
         message: "Attendance record added successfully!",
       });
 
+      toast.success("Attendance record added successfully!", { id: toastId });
+
       setTimeout(() => {
         setNotification(null);
         router.push("/dashboard");
-      }, 2000);
+      }, 1200);
     } catch (error) {
       setNotification({
         type: "error",
         message: "Failed to add attendance. Please try again.",
+      });
+      toast.error("Failed to add attendance. Please try again.", {
+        id: toastId,
       });
     }
   };
@@ -213,7 +221,7 @@ export default function AddAttendance() {
                   id="employeeSearch"
                   value={employeeQuery}
                   onChange={(e) => setEmployeeQuery(e.target.value)}
-                  className="w-full p-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 border-gray-300"
+                  className="w-full p-2 border rounded-md shadow-sm focus:ring-brand focus:border-brand border-gray-300"
                   placeholder="Search by name or ID..."
                   aria-label="Search employees by name or ID"
                 />
@@ -221,7 +229,7 @@ export default function AddAttendance() {
                   id="employee"
                   value={employeeId}
                   onChange={(e) => setEmployeeId(e.target.value)}
-                  className={`w-full p-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 ${
+                  className={`w-full p-2 border rounded-md shadow-sm focus:ring-brand focus:border-brand ${
                     errors.employeeId ? "border-red-500" : "border-gray-300"
                   }`}
                   disabled={
@@ -272,7 +280,7 @@ export default function AddAttendance() {
                     const next = computeConsequence(days);
                     setStatus(next);
                   }}
-                  className={`w-full p-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 ${
+                  className={`w-full p-2 border rounded-md shadow-sm focus:ring-brand focus:border-brand ${
                     errors.attendanceDate ? "border-red-500" : "border-gray-300"
                   }`}
                   required
@@ -301,7 +309,7 @@ export default function AddAttendance() {
                   id="signInTime"
                   value={signInTime}
                   onChange={(e) => setSignInTime(e.target.value)}
-                  className={`w-full p-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 ${
+                  className={`w-full p-2 border rounded-md shadow-sm focus:ring-brand focus:border-brand ${
                     errors.signInTime ? "border-red-500" : "border-gray-300"
                   }`}
                   required
@@ -330,7 +338,7 @@ export default function AddAttendance() {
                   id="signOutTime"
                   value={signOutTime}
                   onChange={(e) => setSignOutTime(e.target.value)}
-                  className={`w-full p-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 ${
+                  className={`w-full p-2 border rounded-md shadow-sm focus:ring-brand focus:border-brand ${
                     errors.signOutTime ? "border-red-500" : "border-gray-300"
                   }`}
                   required
@@ -360,7 +368,7 @@ export default function AddAttendance() {
                   onChange={(e) =>
                     setStatus(e.target.value as ConsequenceStatus)
                   }
-                  className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-brand focus:border-brand"
                   required
                   aria-invalid={!!errors.status}
                   aria-describedby={errors.status ? "status-error" : undefined}
@@ -391,7 +399,7 @@ export default function AddAttendance() {
                   rows={3}
                   value={reason}
                   onChange={(e) => setReason(e.target.value)}
-                  className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-brand focus:border-brand"
                   placeholder="Provide reason for absence, lateness, or leave"
                 />
               </div>
@@ -409,7 +417,7 @@ export default function AddAttendance() {
                   rows={4}
                   value={comments}
                   onChange={(e) => setComments(e.target.value)}
-                  className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-brand focus:border-brand"
                   placeholder="Additional notes or comments..."
                 />
               </div>

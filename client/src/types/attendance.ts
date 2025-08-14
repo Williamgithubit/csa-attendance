@@ -1,4 +1,4 @@
-export type ConsequenceStatus = 'Select Consequence' | 'regular' | 'salary_deduction' | 'suspension' | 'dismissal';
+export type ConsequenceStatus = 'Select Consequence' | 'Regular' | 'Salary Deduction' | 'Suspension' | 'Dismissal';
 
 export interface AttendanceRecord {
   id: string;

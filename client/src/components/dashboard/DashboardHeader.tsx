@@ -73,17 +73,24 @@ const DashboardHeader = () => {
       {/* Top hero */}
       <header className="bg-white shadow rounded p-6 mb-6">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-          <div>
-            <h1 className="text-2xl font-bold">
-              Government of Liberia Attendance
-            </h1>
-            <p className="text-sm text-gray-600">Civil Service Agency</p>
-            <p className="mt-2 text-gray-700">
-              Welcome,{" "}
-              <span className="font-medium">
-                {user?.fullName ?? user?.email ?? "Administrator"}
-              </span>
-            </p>
+          <div className="flex items-center gap-4">
+            <img
+              src="/assets/csa-logo.jpg"
+              alt="CSA logo"
+              className="h-12 w-12 object-cover rounded-full hidden sm:block"
+            />
+            <div>
+              <h1 className="text-2xl font-bold">
+                Government of Liberia Attendance
+              </h1>
+              <p className="text-sm text-gray-600">Civil Service Agency</p>
+              <p className="mt-2 text-gray-700">
+                Welcome,{" "}
+                <span className="font-medium">
+                  {user?.fullName ?? user?.email ?? "Administrator"}
+                </span>
+              </p>
+            </div>
           </div>
           <div className="flex items-center gap-3">
             <Button

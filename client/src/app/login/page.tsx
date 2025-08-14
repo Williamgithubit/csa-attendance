@@ -153,7 +153,7 @@ export default function LoginPage() {
         }}
       />
 
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-gray-100 p-4">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-white to-gray-100 p-4">
         <div className="bg-white p-8 rounded-xl shadow-xl w-full max-w-md">
           {/* Logo & Title */}
           <div className="flex flex-col items-center mb-8">
@@ -187,7 +187,7 @@ export default function LoginPage() {
                 {...register("email")}
                 className={`block w-full px-4 py-3 border ${
                   errors.email ? "border-red-300" : "border-gray-300"
-                } rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
+                } rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent`}
                 disabled={isLoading || loading}
               />
               {errors.email && (
@@ -213,7 +213,7 @@ export default function LoginPage() {
                 {...register("password")}
                 className={`block w-full px-4 py-3 border ${
                   errors.password ? "border-red-300" : "border-gray-300"
-                } rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
+                } rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent`}
                 disabled={isLoading || loading}
               />
               {errors.password && (

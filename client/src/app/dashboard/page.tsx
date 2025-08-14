@@ -7,12 +7,15 @@ import DashboardHeader from "@/components/dashboard/DashboardHeader";
 
 // Dynamically import the DashboardContent component with SSR disabled
 const DashboardContent = dynamic<{}>(
-  () => import("../../components/dashboard/DashboardContent").then((mod) => mod.default),
+  () =>
+    import("../../components/dashboard/DashboardContent").then(
+      (mod) => mod.default
+    ),
   {
     ssr: false,
     loading: () => (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-brand"></div>
       </div>
     ),
   }
@@ -24,7 +27,7 @@ const DashboardPage = () => {
       <Suspense
         fallback={
           <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-brand"></div>
           </div>
         }
       >

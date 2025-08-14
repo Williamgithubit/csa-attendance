@@ -111,7 +111,7 @@ const ClientOnly: React.FC<ClientOnlyProps> = ({ children }) => {
       <>
         <Toaster position="top-center" />
         <div className="flex items-center justify-center min-h-screen">
-          <div className="w-8 h-8 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
+          <div className="w-8 h-8 border-2 border-brand border-t-transparent rounded-full animate-spin" />
         </div>
       </>
     );
@@ -123,7 +123,7 @@ const ClientOnly: React.FC<ClientOnlyProps> = ({ children }) => {
         <Toaster position="top-center" />
         <div className="flex items-center justify-center min-h-screen">
           <div className="text-center">
-            <div className="w-8 h-8 border-2 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto" />
+            <div className="w-8 h-8 border-2 border-brand border-t-transparent rounded-full animate-spin mx-auto" />
             <p className="mt-4 text-gray-700">Redirecting to dashboard…</p>
           </div>
         </div>
@@ -137,7 +137,7 @@ const ClientOnly: React.FC<ClientOnlyProps> = ({ children }) => {
         <Toaster position="top-center" />
         <div className="flex items-center justify-center min-h-screen">
           <div className="text-center">
-            <div className="w-8 h-8 border-2 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto" />
+            <div className="w-8 h-8 border-2 border-brand border-t-transparent rounded-full animate-spin mx-auto" />
             <p className="mt-4 text-gray-700">Signing out…</p>
           </div>
         </div>
