@@ -9,6 +9,12 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Toaster } from "react-hot-toast";
 import { RootState } from "@/types";
+import dynamic from "next/dynamic";
+
+// Dynamically import SplashScreen with no SSR
+const SplashScreen = dynamic(() => import("@/components/ui/SplashScreen"), {
+  ssr: false,
+});
 
 const geistSans = GeistSans;
 const geistMono = GeistMono;
@@ -20,6 +26,8 @@ interface ClientOnlyProps {
 
 const ClientOnly: React.FC<ClientOnlyProps> = ({ children }) => {
   const [mounted, setMounted] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isSplashComplete, setIsSplashComplete] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
   const { token, loading } = useSelector((state: RootState) => ({
@@ -84,6 +92,17 @@ const ClientOnly: React.FC<ClientOnlyProps> = ({ children }) => {
     };
   }, []);
 
+  // Handle loading state and splash screen
+  useEffect(() => {
+    // Simulate minimum splash screen time (1.5s)
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+
+    // Clean up the timer when the component unmounts
+    return () => clearTimeout(timer);
+  }, []);
+
   // Always compute redirect needs and register effects before any early return
   const needsRedirectToDashboard = pathname === "/login" && token;
   const needsRedirectToLogin = pathname !== "/login" && !token;
@@ -101,8 +120,20 @@ const ClientOnly: React.FC<ClientOnlyProps> = ({ children }) => {
     }
   }, [needsRedirectToLogin, router]);
 
-  if (!mounted) {
-    return null;
+  const handleSplashComplete = () => {
+    setIsSplashComplete(true);
+  };
+
+  if (!mounted) return null;
+
+  // Show splash screen while loading or if splash animation hasn't completed
+  if (isLoading || !isSplashComplete) {
+    return (
+      <SplashScreen 
+        isLoading={isLoading} 
+        onLoadingComplete={handleSplashComplete} 
+      />
+    );
   }
 
   // Show global loading while auth is initializing
